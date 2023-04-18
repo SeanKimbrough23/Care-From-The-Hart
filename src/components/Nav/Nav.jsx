@@ -1,47 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
-import { useSelector } from 'react-redux';
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import React from "react";
+import Button from "@mui/material/Button";
+import { HashRouter as Router, Link } from "react-router-dom";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import "./Nav.css";
+import { useSelector } from "react-redux";
 
-function Nav() {
+function NavBar() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
-      <div>
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
-        )}
-
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <>
-            <Link className="navLink" to="/user">
-              Home
+    <>
+      <AppBar position="relative">
+        <Toolbar>
+          <h2 className="nav-title">Home</h2>
+          <Router>
+            <Link to="/Home" style={{ textDecoration: "none", color: "white" }}>
+              <Button variant="inherit"></Button>
             </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
+          </Router>
+          <Router>
+            <Link
+              to="/Portfolio"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button variant="inherit">Portfolio</Button>
             </Link>
-
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-      </div>
-    </div>
+          </Router>
+          <Router>
+            <Link
+              to="/Calendar"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button variant="inherit">Calendar</Button>
+            </Link>
+            <Router>
+              <Link
+                to="/BookingRequest"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button variant="inherit"></Button>
+              </Link>
+            </Router>
+          </Router>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }
 
-export default Nav;
+export default NavBar;
