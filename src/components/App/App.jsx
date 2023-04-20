@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
+import RequestToBook from "../RequestToBook/RequestToBook";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import AboutPage from "../AboutPage/AboutPage";
@@ -44,7 +44,7 @@ function App() {
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/about"
+            path="/"
           >
             <AboutPage />
           </Route>
@@ -60,8 +60,18 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/adminhome"
+          >
+            <UserPage />
+          </ProtectedRoute>
           <Route path="/Calendar">
             <Calendar />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
           </Route>
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -101,6 +111,16 @@ function App() {
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />
+            )}
+          </Route>
+          <Route exact path="/Booking">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to="/user" />
+            ) : (
+              // Otherwise, show the Landing page
+              <RequestToBook />
             )}
           </Route>
 
