@@ -5,25 +5,24 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import NavBar from "../Nav/Nav";
 import Footer from "../Footer/Footer";
 import RequestToBook from "../RequestToBook/RequestToBook";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
+import LogOutButton from "../LogOutButton/LogOutButton";
 import LoginPage from "../LoginPage/LoginPage";
+import Portfolio from "../Portfolio/Portfolio";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import Calendar from "../Calendar/Calendar";
 
 import "./App.css";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
@@ -70,7 +69,7 @@ function App() {
           <Route path="/Calendar">
             <Calendar />
           </Route>
-          <Route path="/about">
+          <Route path="/Home">
             <AboutPage />
           </Route>
           <ProtectedRoute
@@ -89,6 +88,16 @@ function App() {
             ) : (
               // Otherwise, show the login page
               <LoginPage />
+            )}
+          </Route>
+          <Route exact path="/Portfolio">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to="/user" />
+            ) : (
+              // Otherwise, show the registration page
+              <Portfolio />
             )}
           </Route>
 
@@ -133,6 +142,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

@@ -99,7 +99,7 @@ function ResponsiveAppBar() {
             </Typography>
             <Router>
               <Link
-                to="/about"
+                to="/Home"
                 style={{ textDecoration: "none", color: "#FF91a4" }}
               >
                 <Button variant="inherit">Home</Button>

@@ -12,8 +12,9 @@ const RequestToBook = () => {
     Email: "",
   });
   return (
-    <form sx={{ display: "flex", justifyContent: "center" }}>
+    <div sx={{ display: "flex", justifyContent: "center" }}>
       <Box
+        component="form"
         sx={{
           display: "inline-grid",
           "& .MuiTextField-root": { m: 1, width: "25ch" },
@@ -90,10 +91,12 @@ const RequestToBook = () => {
           Submit
         </Button>
       </Box>
-    </form>
+    </div>
   );
 };
 export default RequestToBook;
 
 // To Do List:
 // 1. Fix hover over button color
+//2 Fix the input form to middle of the page
+//3. fix buttons so they align in middle and next to each other
