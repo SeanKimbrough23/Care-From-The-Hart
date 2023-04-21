@@ -54,12 +54,13 @@ const Portfolio = () => {
   return (
     <div className="container">
       <div></div>
-      {post.map((articles) => (
-        <div key={articles.id}>
-          <div>{articles.content}</div>
-          <img src={articles.image_url} alt={articles.title} />
-        </div>
-      ))}
+      {post &&
+        post.map((articles) => (
+          <div key={articles.id}>
+            <div>{articles.content}</div>
+            <img src={articles.image_url} alt={articles.title} />
+          </div>
+        ))}
       <Button onClick={handleOpen}>
         What it’s like to specialize in psychiatry: Shadowing Dr. Hart
       </Button>
