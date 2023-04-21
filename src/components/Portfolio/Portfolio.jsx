@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
-import { useState } from "react";
 
 const ChildModal = () => {
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const post = useSelector((store) => store.post);
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_ARTICLE_DETAILS" });
+  }, [dispatch]);
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -14,7 +20,7 @@ const ChildModal = () => {
     setOpen(false);
   };
   return (
-    <React.Fragment>
+    <>
       <Button onClick={handleOpen}>Open Child Modal</Button>
       <Modal
         open={open}
@@ -30,20 +36,30 @@ const ChildModal = () => {
           <Button onClick={handleClose}>Close Child Modal</Button>
         </Box>
       </Modal>
-    </React.Fragment>
+    </>
   );
 };
 
 const Portfolio = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  const post = useSelector((store) => store.post);
+
   return (
-    <div>
+    <div className="container">
+      <div></div>
+      {post.map((articles) => (
+        <div key={articles.id}>
+          <div>{articles.content}</div>
+          <img src={articles.image_url} alt={articles.title} />
+        </div>
+      ))}
       <Button onClick={handleOpen}>
         What it’s like to specialize in psychiatry: Shadowing Dr. Hart
       </Button>
@@ -58,6 +74,7 @@ const Portfolio = () => {
           <p id="parent-modal-description">
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </p>
+
           <ChildModal />
         </Box>
       </Modal>
