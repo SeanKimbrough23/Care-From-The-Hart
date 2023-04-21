@@ -2,6 +2,9 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import firstPicture from "../Images/Dr_Hart.jpg";
 import secondPicture from "../Images/Dr.Hart white coat.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { HashRouter as Router, Link } from "react-router-dom";
 import CardHeader from "@mui/material/CardHeader";
 import thirdPicture from "../Images/06f633ce-4467-4631-8006-3d756237d7c5.jpg";
 import fourthPicture from "../Images/Dr.Hart arms folded.jpeg";
@@ -18,6 +21,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -347,10 +351,35 @@ function AboutPage() {
           </CardContent>
         </Collapse>
       </Card>
+      <Link
+        to="/Portfolio"
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          color: "#FF91a4",
+        }}
+      >
+        <Button
+          style={{
+            position: "sticky",
+            bottom: 0,
+            right: 40,
+            margin: 2,
+
+            fontWeight: "bold",
+            fontSize: "20px",
+            variant: "text",
+            color: "green",
+            p: 5,
+          }}
+        >
+          Portfolio{""}
+          <FontAwesomeIcon icon={faArrowRight} color="green" />
+        </Button>
+      </Link>
     </div>
   );
 }
-
 export default AboutPage;
 
 //  To Do List:

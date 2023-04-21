@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 
 const Portfolio = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const articleDetails = useSelector((store) => store.articleDetails);
+  const user = useSelector((store) => store.user);
+  // console.log("inside portfolio", user);
+  const { id } = useParams();
+  //console.log("article details", articleDetails);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -13,18 +21,29 @@ const Portfolio = () => {
     setOpen(false);
   };
 
-  const post = useSelector((store) => store.post);
+  const getArticleDetails = () => {
+    dispatch({
+      type: "FETCH_ARTICLE_DETAILS",
+      payload: id,
+    });
+  };
+
+  useEffect(() => {
+    getArticleDetails();
+  }, []);
 
   return (
     <div className="grid">
-      <div></div>
-      {post &&
-        post.map((articles) => (
-          <div key={articles.id}>
-            <div>{articles.content}</div>
-            <img src={articles.image_url} alt={articles.title} />
+      {articleDetails.length > 0 ? (
+        articleDetails.map((articleDetails) => (
+          <div key={articleDetails.id}>
+            <div>{articleDetails.content}</div>
+            <img src={articleDetails.image_url} alt={articleDetails.title} />
           </div>
-        ))}
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
       <Button
         style={{
           display: "flex",

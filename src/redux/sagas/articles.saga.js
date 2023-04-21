@@ -2,13 +2,14 @@ import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 function* fetchArticleDetails(action) {
-  //console.log("action for fetch details", action);
+  console.log("action for fetch details", action);
   // get single article details
   try {
-    const articleDetails = yield axios.get(`/api/articles/${action.payload}`);
+    const articleDetails = yield axios.get(`/api/articles`);
+    console.log("article details saga", articleDetails);
     yield put({
-      type: "FETCH_ARTICLE_DETAILS",
-      payload: articleDetails.data[2],
+      type: "SET_ARTICLE_DETAILS",
+      payload: articleDetails.data,
     });
   } catch (error) {
     console.log("get single article error", error);

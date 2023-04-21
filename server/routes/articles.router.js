@@ -18,4 +18,6 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.post;
+
 module.exports = router;

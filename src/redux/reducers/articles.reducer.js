@@ -4,14 +4,11 @@ import { combineReducers } from "redux";
 const articleDetails = (state = {}, action) => {
   switch (action.type) {
     case "SET_ARTICLE_DETAILS":
+      console.log("inside reducer", action.payload);
       return action.payload;
-    case "CLEAR_ARTICLE_DETAILS":
-      return {};
     default:
       return state;
   }
 };
 
-export default combineReducers({
-  articleDetails,
-});
+export default articleDetails;
