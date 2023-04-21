@@ -1,6 +1,6 @@
 -- CREATE DATABASE "Care_From_The_Hart"
 
-CREATE TABLE "users" (
+CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
 	"username" VARCHAR (80) UNIQUE NOT NULL,
 	"password" VARCHAR(100) NOT NULL,
@@ -17,13 +17,13 @@ CREATE TABLE "articles" (
 CREATE TABLE "comments" (
 	"id" SERIAL PRIMARY KEY,
 	"articles_id" INT REFERENCES "articles" NOT NULL,
-	"users_id" INT REFERENCES "users" NOT NULL,
+	"user_id" INT REFERENCES "user" NOT NULL,
 	"comment" VARCHAR(5000) NOT NULL
 );
 
 CREATE TABLE "booking" (
 	"id" SERIAL PRIMARY KEY,
-	"users_id" INT REFERENCES "users" NOT NULL,
+	"user_id" INT REFERENCES "user" NOT NULL,
 	"date" DATE NOT NULL,
 	"request" VARCHAR(5000) NOT NULL,
 	"isApproved" BOOLEAN NOT NULL DEFAULT 'false'	

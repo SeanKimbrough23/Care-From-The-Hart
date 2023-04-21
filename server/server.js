@@ -1,5 +1,5 @@
 const express = require("express");
-const articlesRouter = require("./routes/articles.router");
+
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
@@ -10,6 +10,7 @@ const passport = require("./strategies/user.strategy");
 
 // Route includes
 const userRouter = require("./routes/user.router");
+const articlesRouter = require("./routes/articles.router");
 
 // Body parser middleware
 app.use(bodyParser.json());

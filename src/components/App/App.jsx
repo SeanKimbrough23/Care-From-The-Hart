@@ -43,7 +43,7 @@ const App = () => {
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/"
+            path="/AboutMe"
           >
             <AboutPage />
           </Route>
@@ -59,19 +59,7 @@ const App = () => {
           >
             <UserPage />
           </ProtectedRoute>
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/adminhome"
-          >
-            <UserPage />
-          </ProtectedRoute>
-          <Route path="/Calendar">
-            <Calendar />
-          </Route>
-          <Route path="/Home">
-            <AboutPage />
-          </Route>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -79,28 +67,15 @@ const App = () => {
           >
             <InfoPage />
           </ProtectedRoute>
-
-          <Route exact path="/login">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
+          <Route path="/Calendar">
+            <Calendar />{" "}
           </Route>
-          <Route exact path="/Portfolio">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <Portfolio />
-            )}
+          <Route path="/Portfolio">
+            <Portfolio />{" "}
           </Route>
-
+          <Route path="/Booking">
+            <RequestToBook />
+          </Route>
           <Route exact path="/registration">
             {user.id ? (
               // If the user is already logged in,
@@ -112,7 +87,7 @@ const App = () => {
             )}
           </Route>
 
-          <Route exact path="/Home">
+          <Route exact path="/home">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -120,16 +95,6 @@ const App = () => {
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />
-            )}
-          </Route>
-          <Route exact path="/Booking">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <RequestToBook />
             )}
           </Route>
 
@@ -145,3 +110,99 @@ const App = () => {
 };
 
 export default App;
+
+//           {/* For protected routes, the view could show one of several things on the same route.
+//             Visiting localhost:3000/user will show the UserPage if the user is logged in.
+//             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+//             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+//           <ProtectedRoute
+//             // logged in shows UserPage else shows LoginPage
+//             exact
+//             path="/user"
+//           >
+//             <UserPage />
+//           </ProtectedRoute>
+//           <ProtectedRoute
+//             // logged in shows UserPage else shows LoginPage
+//             exact
+//             path="/adminhome"
+//           >
+//             <UserPage />
+//           </ProtectedRoute>
+//           <Route path="/Calendar">
+//             <Calendar />
+//           </Route>
+//           <Route path="/home">
+//             <AboutPage />
+//           </Route>
+//           <ProtectedRoute
+//             // logged in shows InfoPage else shows LoginPage
+//             exact
+//             path="/info"
+//           >
+//             <InfoPage />
+//           </ProtectedRoute>
+
+//           <Route exact path="/login">
+//             {user.id ? (
+//               // If the user is already logged in,
+//               // redirect to the /user page
+//               <Redirect to="/user" />
+//             ) : (
+//               // Otherwise, show the login page
+//               <LoginPage />
+//             )}
+//           </Route>
+//           <Route exact path="/Portfolio">
+//             {user.id ? (
+//               // If the user is already logged in,
+//               // redirect them to the /user page
+//               <Redirect to="/user" />
+//             ) : (
+//               // Otherwise, show the registration page
+//               <Portfolio />
+//             )}
+//           </Route>
+
+//           <Route exact path="/registration">
+//             {user.id ? (
+//               // If the user is already logged in,
+//               // redirect them to the /user page
+//               <Redirect to="/user" />
+//             ) : (
+//               // Otherwise, show the registration page
+//               <RegisterPage />
+//             )}
+//           </Route>
+
+//           <Route exact path="/Home">
+//             {user.id ? (
+//               // If the user is already logged in,
+//               // redirect them to the /user page
+//               <Redirect to="/user" />
+//             ) : (
+//               // Otherwise, show the Landing page
+//               <LandingPage />
+//             )}
+//           </Route>
+//           <Route exact path="/Booking">
+//             {user.id ? (
+//               // If the user is already logged in,
+//               // redirect them to the /user page
+//               <Redirect to="/user" />
+//             ) : (
+//               // Otherwise, show the Landing page
+//               <RequestToBook />
+//             )}
+//           </Route>
+
+//           {/* If none of the other routes matched, we will show a 404. */}
+//           <Route>
+//             <h1>404</h1>
+//           </Route>
+//         </Switch>
+//         <Footer />
+//       </div>
+//     </Router>
+//   );
+// };

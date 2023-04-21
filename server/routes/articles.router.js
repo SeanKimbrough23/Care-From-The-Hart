@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
-router.get("/", (req, res) => {
-  const query = `SELECT * FROM articles ORDER BY "title" ASC`;
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const query = `SELECT * FROM articles ORDER BY "id"`;
   pool
     .query(query)
     .then((result) => {
