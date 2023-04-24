@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../Nav/Nav";
 import Footer from "../Footer/Footer";
+//import TextareaValidator from "../Comments/Comments";
 import RequestToBook from "../RequestToBook/RequestToBook";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";

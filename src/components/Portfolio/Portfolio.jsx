@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import TextareaValidator from "../Comments/Comments";
 
 const style = {
   position: "absolute",
@@ -75,9 +76,10 @@ const Portfolio = () => {
                 <a href="https://www.startribune.com/inspired-s-race-and-equity-series-explores-mental-health-disparities-with-psychiatrist-dr-dionne-ha/600046918/?refresh=true">
                   Link to Full Article
                 </a>
+                <TextareaValidator />
               </Box>
             </Modal>
-            <Button>Leave A Comment</Button>
+            {/* <Button>Leave A Comment </Button> */}
           </div>
         ))
       ) : (
