@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
+import "./Portfolio.css";
 import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
@@ -26,13 +27,16 @@ const Portfolio = () => {
   // console.log("inside portfolio", user);
   const { id } = useParams();
   console.log("article details", articleDetails);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [modalOpen, setModalOpen] = useState(
+    Array(articleDetails.length).fill(false)
+  ); // create an array of states for each article
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const getArticleDetails = () => {
     dispatch({
@@ -44,11 +48,26 @@ const Portfolio = () => {
   useEffect(() => {
     getArticleDetails();
   }, []);
+
+  const handleOpen = (index) => {
+    // use the index to set the correct state value
+    const newModalOpen = [...modalOpen];
+    newModalOpen[index] = true;
+    setModalOpen(newModalOpen);
+  };
+
+  const handleClose = (index) => {
+    // use the index to set the correct state value
+    const newModalOpen = [...modalOpen];
+    newModalOpen[index] = false;
+    setModalOpen(newModalOpen);
+  };
+
   console.log(articleDetails);
   return (
     <div className="grid">
       {articleDetails.length > 0 ? (
-        articleDetails.map((articleDetails) => (
+        articleDetails.map((articleDetails, index) => (
           <div key={articleDetails.id}>
             <Button
               style={{
@@ -56,26 +75,24 @@ const Portfolio = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onClick={handleOpen}
+              onClick={() => handleOpen(index)} // pass the index to the handleOpen function
             >
-              What it’s like to specialize in psychiatry: Shadowing Dr. Hart
+              {articleDetails.title}
             </Button>
             <Modal
-              open={open}
-              onClose={handleClose}
+              open={modalOpen[index]} // use the index to access the correct state value
+              onClose={() => handleClose(index)} // pass the index to the handleClose function
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  What it’s like to specialize in psychiatry: Shadowing Dr. Hart
+                  {articleDetails.title}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   {articleDetails.content}
                 </Typography>
-                <a href="https://www.startribune.com/inspired-s-race-and-equity-series-explores-mental-health-disparities-with-psychiatrist-dr-dionne-ha/600046918/?refresh=true">
-                  Link to Full Article
-                </a>
+                <a href={articleDetails.link}>Link to Full Article</a>
                 <TextareaValidator />
               </Box>
             </Modal>

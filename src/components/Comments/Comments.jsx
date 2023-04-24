@@ -1,10 +1,13 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
+import { useParams, useHistory } from "react-router-dom";
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import IconButton from "@mui/joy/IconButton";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Menu from "@mui/joy/Menu";
 import MenuItem from "@mui/joy/MenuItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
@@ -14,9 +17,25 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 
 function TextareaValidator() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const commentDetails = useSelector((store) => store.commentDetails);
+  const { id } = useParams();
   const [italic, setItalic] = React.useState(false);
   const [fontWeight, setFontWeight] = React.useState("normal");
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const getCommentDetails = () => {
+    dispatch({
+      type: "FETCH_COMMENTS",
+      payload: id,
+    });
+  };
+
+  useEffect(() => {
+    getCommentDetails();
+    console.log(getCommentDetails);
+  }, []);
   return (
     <FormControl>
       <FormLabel>Your comment</FormLabel>

@@ -42,8 +42,14 @@ function AboutPage() {
   };
 
   return (
-    <div className="grid">
-      <Card sx={{ maxWidth: 200, padding: 10 }}>
+    <div className="card-container">
+      <Card
+        sx={{
+          backgroundColor: "lightpink",
+          maxWidth: 200,
+          padding: 10,
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="Dr.Hart">
@@ -119,7 +125,13 @@ function AboutPage() {
           </CardContent>
         </Collapse>
       </Card>
-      <Card sx={{ maxWidth: 200, padding: 10 }}>
+      <Card
+        sx={{
+          backgroundColor: "lightgreen",
+          maxWidth: 200,
+          padding: 10,
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="Dr.Hart">
@@ -195,7 +207,13 @@ function AboutPage() {
           </CardContent>
         </Collapse>
       </Card>
-      <Card sx={{ maxWidth: 200, padding: 10 }}>
+      <Card
+        sx={{
+          backgroundColor: "lightpink",
+          maxWidth: 200,
+          padding: 10,
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar
@@ -276,7 +294,13 @@ function AboutPage() {
           </CardContent>
         </Collapse>
       </Card>
-      <Card sx={{ maxWidth: 200, padding: 10 }}>
+      <Card
+        sx={{
+          backgroundColor: "lightgreen",
+          maxWidth: 200,
+          padding: 10,
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="Dr.Hart">
@@ -362,7 +386,7 @@ function AboutPage() {
       >
         <Button
           style={{
-            position: "sticky",
+            position: "fixed",
             bottom: 0,
             right: 40,
             margin: 2,
