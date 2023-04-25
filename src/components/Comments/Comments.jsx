@@ -9,6 +9,7 @@ import IconButton from "@mui/joy/IconButton";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Menu from "@mui/joy/Menu";
+import { Typography } from "@mui/material";
 import MenuItem from "@mui/joy/MenuItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import FormatBold from "@mui/icons-material/FormatBold";
@@ -20,7 +21,6 @@ function TextareaValidator() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [comment, setComment] = useState("");
-
   const commentDetails = useSelector((store) => store.commentDetails);
   const { id } = useParams();
   const [italic, setItalic] = React.useState(false);
@@ -107,9 +107,7 @@ function TextareaValidator() {
             >
               <FormatItalic />
             </IconButton>
-            <Button mt={2} onClick={handleSubmit}>
-              Post
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
           </Box>
         }
         sx={{
