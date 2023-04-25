@@ -19,6 +19,8 @@ import Check from "@mui/icons-material/Check";
 function TextareaValidator() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [comment, setComment] = useState("");
+
   const commentDetails = useSelector((store) => store.commentDetails);
   const { id } = useParams();
   const [italic, setItalic] = React.useState(false);
@@ -31,6 +33,15 @@ function TextareaValidator() {
       payload: id,
     });
   };
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(comment); // Replace with your own logic to submit the comment
+    setComment("");
+  };
 
   useEffect(() => {
     getCommentDetails();
@@ -40,7 +51,9 @@ function TextareaValidator() {
     <FormControl>
       <FormLabel>Your comment</FormLabel>
       <Textarea
-        placeholder="Type something here…"
+        value={comment}
+        onChange={handleCommentChange}
+        placeholder="Request Details Here… "
         minRows={3}
         endDecorator={
           <Box
@@ -94,7 +107,9 @@ function TextareaValidator() {
             >
               <FormatItalic />
             </IconButton>
-            <Button sx={{ ml: "auto" }}>Send</Button>
+            <Button mt={2} onClick={handleSubmit}>
+              Post
+            </Button>
           </Box>
         }
         sx={{
