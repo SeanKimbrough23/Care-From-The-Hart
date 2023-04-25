@@ -17,7 +17,8 @@ import FormatItalic from "@mui/icons-material/FormatItalic";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 
-function TextareaValidator() {
+function TextareaValidator({ articleId }) {
+  //destructured to grab prop key that we passed in Portfolio.jsx
   const dispatch = useDispatch();
   const history = useHistory();
   const [comment, setComment] = useState("");
@@ -37,10 +38,14 @@ function TextareaValidator() {
     setComment(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (articleId) => {
     event.preventDefault();
-    console.log(comment); // Replace with your own logic to submit the comment
-    setComment("");
+    let articleComment = {
+      articles_id: articleId,
+      comment: comment,
+    };
+    console.log("🥰", articleComment); // Replace with your own logic to submit the comment
+    dispatch({ type: "POST_NEW_COMMENT", payload: articleComment });
   };
 
   useEffect(() => {
@@ -52,7 +57,7 @@ function TextareaValidator() {
       <FormLabel>Your comment</FormLabel>
       <Textarea
         value={comment}
-        onChange={handleCommentChange}
+        onChange={() => handleCommentChange(event)} //() telling my code to pause
         placeholder="Request Details Here… "
         minRows={3}
         endDecorator={
@@ -107,7 +112,7 @@ function TextareaValidator() {
             >
               <FormatItalic />
             </IconButton>
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={() => handleSubmit(articleId)}>Submit</Button>
           </Box>
         }
         sx={{

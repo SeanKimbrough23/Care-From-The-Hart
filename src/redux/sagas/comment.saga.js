@@ -42,3 +42,6 @@ function* commentWatcherSaga() {
 }
 
 export default commentWatcherSaga;
+
+//dispath triggers the SAGA which connects to the Route (router.js), which sends the QUERY to the DB
+//action.payload becomes req.body

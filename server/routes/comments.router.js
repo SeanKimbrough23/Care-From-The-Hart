@@ -20,10 +20,15 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 router.post("/", rejectUnauthenticated, (req, res) => {
-  console.log("inside comment router.post");
-  const insertCommentQuery = `INSERT INTO "comments" ("comment") VALUES ($1) RETURNING "id";`;
+  //req.user
+  console.log("inside comment router.post", req.body);
+  const insertCommentQuery = `INSERT INTO "comments" ("articles_id","user_id","comment") VALUES ($1, $2, $3) RETURNING "id";`;
   pool
-    .query(insertCommentQuery, [req.body.comment])
+    .query(insertCommentQuery, [
+      req.body.articles_id,
+      req.user.id,
+      req.body.comment,
+    ])
     .then((result) => {
       console.log("Comment", result.rows[0].id);
 
@@ -31,7 +36,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.semdStatus(500);
+      res.sendStatus(500);
     });
 });
 

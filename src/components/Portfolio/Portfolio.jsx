@@ -97,7 +97,7 @@ const Portfolio = () => {
                   {article.content}
                 </Typography>
                 <a href={article.link}>Link to Full Article</a>
-                <TextareaValidator />
+                <TextareaValidator articleId={article.id} />
               </Box>
             </Modal>
           </div>
