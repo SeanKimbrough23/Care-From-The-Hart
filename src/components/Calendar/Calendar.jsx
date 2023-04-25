@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -9,11 +9,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Calendar = () => {
-  //const [value, setValue] = useState(new Date());
-  //const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 5, 12]);
+  const [option, setOption] = useState({}); // add a state variable to hold the calendar options
+
   const handleDateClick = (arg) => {
     alert(arg.dateStr);
   };
+
+  const handleEventClick = (arg) => {
+    console.log(arg.event);
+  };
+
+  // define a function to update the calendar options
+  const updateOptions = () => {
+    setOption({
+      weekends: false, // disable weekends
+      datesSet: (info) => {
+        console.log("Calendar starting date:", info.startStr);
+      },
+      events: [
+        // define events to be displayed on the calendar
+        {
+          title: "Event 1",
+          start: "2023-05-01T10:00:00",
+          end: "2023-05-01T12:00:00",
+        },
+        {
+          title: "Event 2",
+          start: "2023-05-02T13:00:00",
+          end: "2023-05-02T15:00:00",
+        },
+      ],
+    });
+  };
+
   return (
     <div>
       <h1 className="Calendar" color="#FF91a4">
@@ -28,12 +56,16 @@ const Calendar = () => {
           end: "dayGridMonth, timeGridWeek, timeGridDay",
         }}
         dateClick={handleDateClick}
+        eventClick={handleEventClick} // add a callback function for event click
         initialView={"dayGridMonth"}
         editable={true}
         selectable={true}
         dayMaxEvents={true}
         height={"90vh"}
+        {...option} // spread the options object to the Fullcalendar component
       />
+      <Button onClick={updateOptions}>Update Options</Button> // add a button to
+      update the calendar options
       <Link
         to="/Booking"
         style={{
