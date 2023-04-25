@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import "./Portfolio.css";
 import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
+import "./Portfolio.css";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import TextareaValidator from "../Comments/Comments";
@@ -70,7 +71,7 @@ const Portfolio = () => {
     <div className="grid">
       {articleDetails.length > 0 ? (
         articleDetails.map((article, index) => (
-          <div key={article.id}>
+          <div key={article.id} className="card">
             <ArticleIcon
               onClick={() => handleOpen(index)}
               sx={{

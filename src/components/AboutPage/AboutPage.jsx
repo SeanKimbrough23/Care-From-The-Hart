@@ -37,8 +37,12 @@ const ExpandMore = styled((props) => {
 
 function AboutPage() {
   const [expanded, setExpanded] = React.useState(false);
+  const [likeCount, setLikeCount] = React.useState(0);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const handleLikeClick = () => {
+    setLikeCount(likeCount + 1);
   };
 
   return (
@@ -77,7 +81,7 @@ function AboutPage() {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">

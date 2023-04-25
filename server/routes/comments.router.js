@@ -6,7 +6,8 @@ const {
 } = require("../modules/authentication-middleware");
 
 router.get("/", rejectUnauthenticated, (req, res) => {
-  const query = `SELECT * FROM "comments" ORDER BY "id"`;
+  console.log("inside comment router.get");
+  const query = `SELECT * FROM comments ORDER BY "id"`;
   pool
     .query(query)
     .then((result) => {
