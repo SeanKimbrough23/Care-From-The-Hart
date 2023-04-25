@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import TextareaValidator from "../Comments/Comments";
+import ArticleIcon from "@mui/icons-material/Article";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 const style = {
   position: "absolute",
@@ -14,7 +16,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  bgcolor: "lightpink",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -67,36 +69,36 @@ const Portfolio = () => {
   return (
     <div className="grid">
       {articleDetails.length > 0 ? (
-        articleDetails.map((articleDetails, index) => (
-          <div key={articleDetails.id}>
-            <Button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+        articleDetails.map((article, index) => (
+          <div key={article.id}>
+            <ArticleIcon
+              onClick={() => handleOpen(index)}
+              sx={{
+                backgroundColor: "lightpink",
+                margin: 5,
+                padding: 10,
+                fontSize: "extralarge",
               }}
-              onClick={() => handleOpen(index)} // pass the index to the handleOpen function
             >
-              {articleDetails.title}
-            </Button>
+              <OpenInNewIcon />
+            </ArticleIcon>
             <Modal
-              open={modalOpen[index]} // use the index to access the correct state value
-              onClose={() => handleClose(index)} // pass the index to the handleClose function
+              open={modalOpen[index]}
+              onClose={() => handleClose(index)}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {articleDetails.title}
+                  {article.title}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {articleDetails.content}
+                  {article.content}
                 </Typography>
-                <a href={articleDetails.link}>Link to Full Article</a>
+                <a href={article.link}>Link to Full Article</a>
                 <TextareaValidator />
               </Box>
             </Modal>
-            {/* <Button>Leave A Comment </Button> */}
           </div>
         ))
       ) : (
