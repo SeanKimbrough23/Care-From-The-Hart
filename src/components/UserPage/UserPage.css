@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+  font-size: 40px;
+  animation: flash 2s linear infinite;
+}
+
+@keyframes flash {
+  0% {
+    color: pink;
+  }
+  50% {
+    color: green;
+  }
+  100% {
+    color: pink;
+  }
+}

@@ -19,6 +19,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 router.post("/", rejectUnauthenticated, (req, res) => {
+  console.log("inside comment router.post");
   const insertCommentQuery = `INSERT INTO "comments" ("comment") VALUES ($1) RETURNING "id";`;
   pool
     .query(insertCommentQuery, [req.body.comment])

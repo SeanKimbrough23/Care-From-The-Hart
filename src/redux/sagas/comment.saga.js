@@ -2,7 +2,7 @@ import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 function* fetchComments(action) {
-  console.log("action for comments", action);
+  //console.log("action for comments", action);
   // get comments
   try {
     const commentDetails = yield axios.get(`/api/comment`);
