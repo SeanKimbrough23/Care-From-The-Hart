@@ -17,11 +17,10 @@ function* fetchArticleDetails(action) {
 }
 
 function* articleWatcherSaga() {
-  //yield takeEvery("FETCH_MOVIES", fetchAllMovies);
   // trigger saga to GET Article
   yield takeEvery("FETCH_ARTICLE_DETAILS", fetchArticleDetails);
-  // yield takeEvery("POST_NEW_MOVIE", postNewMovie);
-  // yield takeEvery("UPDATE_MOVIE", updateMovie);
+  // yield takeEvery("POST_NEW_ARTICLES", postNewArticles);
+  // yield takeEvery("UPDATE_ARTICLES", updateArticles);
 }
 
 export default articleWatcherSaga;

@@ -33,12 +33,35 @@ function* handleCommentSubmit(action) {
     console.log("get comments error", error);
   }
 }
+function* updateComment(action) {
+  try {
+    const articleComments = yield axios.put(
+      `/api/comment/${action.payload.commentId}`,
+      action.payload
+    );
+    yield put({ type: "FETCH_COMMENTS", articleComments });
+  } catch (error) {
+    console.log("Error updating comment error", error);
+  }
+}
+
+function* deleteComment(action) {
+  try {
+    const response = yield axios.delete(`/api/comment/${action.payload}`);
+    {
+      yield put({ type: "FETCH_COMMENTS" });
+    }
+  } catch (error) {
+    console.log("Error deleting comment", error);
+  }
+}
+
 function* commentWatcherSaga() {
-  //yield takeEvery("FETCH_MOVIES", fetchAllMovies);
   // trigger saga to GET Article
   yield takeEvery("FETCH_COMMENTS", fetchComments);
   yield takeEvery("POST_NEW_COMMENT", handleCommentSubmit);
-  // yield takeEvery("UPDATE_MOVIE", updateMovie);
+  yield takeEvery("UPDATE_COMMENT", updateComment);
+  yield takeEvery("DELETE_COMMENT", deleteComment);
 }
 
 export default commentWatcherSaga;

@@ -4,14 +4,17 @@ import Box from "@mui/material/Box";
 import "./Portfolio.css";
 import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
-import "./Portfolio.css";
 import Button from "@mui/material/Button";
+import CommentReplys from "../Comments/CommentReplys";
 import { Typography } from "@mui/material";
 import TextareaValidator from "../Comments/Comments";
 import ArticleIcon from "@mui/icons-material/Article";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import CommentInput from "../Comments/CommentInput";
 
 const style = {
+  maxWidth: 600, // set the maximum width of the modal to 600px
+  height: "80%",
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -21,6 +24,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  overflowY: "scroll",
 };
 
 const Portfolio = () => {
@@ -33,6 +37,10 @@ const Portfolio = () => {
   const [modalOpen, setModalOpen] = useState(
     Array(articleDetails.length).fill(false)
   ); // create an array of states for each article
+  const [commentReplysOpen, setCommentReplysOpen] = useState(
+    Array(articleDetails.length).fill(false)
+  );
+  const [openCommentId, setOpenCommentId] = useState(null); // new state to keep track of the open comments
 
   // const handleOpen = () => {
   //   setOpen(true);
@@ -57,6 +65,11 @@ const Portfolio = () => {
     const newModalOpen = [...modalOpen];
     newModalOpen[index] = true;
     setModalOpen(newModalOpen);
+
+    // close CommentReplys for all articles except the current one
+    const newCommentReplysOpen = Array(articleDetails.length).fill(false);
+    newCommentReplysOpen[index] = true;
+    setCommentReplysOpen(newCommentReplysOpen);
   };
 
   const handleClose = (index) => {
@@ -64,9 +77,27 @@ const Portfolio = () => {
     const newModalOpen = [...modalOpen];
     newModalOpen[index] = false;
     setModalOpen(newModalOpen);
+
+    // close CommentReplys for the current article
+    const newCommentReplysOpen = [...commentReplysOpen];
+    newCommentReplysOpen[index] = !newCommentReplysOpen[index];
+    setCommentReplysOpen(newCommentReplysOpen);
   };
 
-  console.log(articleDetails);
+  const toggleCommentReplys = (index) => {
+    const newCommentReplysOpen = [...commentReplysOpen];
+    newCommentReplysOpen[index] = !newCommentReplysOpen[index];
+    setCommentReplysOpen(newCommentReplysOpen);
+  };
+
+  const handleOpenComment = (commentId) => {
+    setOpenCommentId(commentId);
+  };
+
+  const handleCloseComment = () => {
+    setOpenCommentId(null);
+  };
+
   return (
     <div className="grid">
       {articleDetails.length > 0 ? (
@@ -98,6 +129,22 @@ const Portfolio = () => {
                 </Typography>
                 <a href={article.link}>Link to Full Article</a>
                 <TextareaValidator articleId={article.id} />
+                <div style={{ marginTop: "1rem" }}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => toggleCommentReplys(index)}
+                  >
+                    {commentReplysOpen[index] ? "Hide Replies" : "Show Replies"}
+                  </Button>
+                </div>
+                {/* {commentReplysOpen[index] && (
+                  <CommentReplys
+                    open={commentReplysOpen[index]}
+                    onClose={() => handleClose(index)}
+                    sx={{ maxHeight: 100 }} // set the maximum height of the CommentReplys to 400px
+                  />
+                )} */}
               </Box>
             </Modal>
           </div>
@@ -152,4 +199,4 @@ export default Portfolio;
 //       </Modal>
 //     </>
 //   );
-// };
+//

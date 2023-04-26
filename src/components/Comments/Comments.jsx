@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Menu from "@mui/joy/Menu";
 import { Typography } from "@mui/material";
+import CommentReplys from "./CommentReplys";
+import "./Comments.css";
 import MenuItem from "@mui/joy/MenuItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import FormatBold from "@mui/icons-material/FormatBold";
@@ -23,7 +25,6 @@ function TextareaValidator({ articleId }) {
   const history = useHistory();
   const [comment, setComment] = useState("");
   const commentDetails = useSelector((store) => store.commentDetails);
-  const { id } = useParams();
   const [italic, setItalic] = React.useState(false);
   const [fontWeight, setFontWeight] = React.useState("normal");
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -31,15 +32,37 @@ function TextareaValidator({ articleId }) {
   const getCommentDetails = () => {
     dispatch({
       type: "FETCH_COMMENTS",
-      payload: id,
     });
   };
+  const updateComment = () => {
+    dispatch({
+      type: "UPDATE_COMMENT",
+      // using payload to tell route which comment id to target and it is apart of the body and URL
+      payload: {
+        comment: comment,
+        commentId: commentDetails.id,
+        userId: commentDetails.user_id,
+        articleId: articleId,
+      },
+    });
+  };
+
+  const deleteComment = (commentId) => {
+    dispatch({
+      type: "DELETE_COMMENT",
+      payload: commentDetails.id,
+      articleId,
+      // using payload to tell route which comment id to target and it is apart of the URL
+    });
+  };
+
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
 
   const handleSubmit = (articleId) => {
     event.preventDefault();
+    setComment("");
     let articleComment = {
       articles_id: articleId,
       comment: comment,
@@ -50,78 +73,100 @@ function TextareaValidator({ articleId }) {
 
   useEffect(() => {
     getCommentDetails();
-    console.log(getCommentDetails);
   }, []);
+  console.log("🤩", commentDetails);
+
   return (
-    <FormControl>
-      <FormLabel>Your comment</FormLabel>
-      <Textarea
-        value={comment}
-        onChange={() => handleCommentChange(event)} //() telling my code to pause
-        placeholder="Request Details Here… "
-        minRows={3}
-        endDecorator={
-          <Box
-            sx={{
-              display: "flex",
-              gap: "var(--Textarea-paddingBlock)",
-              pt: "var(--Textarea-paddingBlock)",
-              borderTop: "1px solid",
-              borderColor: "divider",
-              flex: "auto",
-            }}
-          >
-            <IconButton
-              variant="plain"
-              color="neutral"
-              onClick={(event) => setAnchorEl(event.currentTarget)}
+    <>
+      <FormControl>
+        <FormLabel>Your comment</FormLabel>
+        <Textarea
+          value={comment}
+          onChange={(event) => setComment(event.target.value)} //() telling my code to pause
+          placeholder="Comments… "
+          minRows={3}
+          endDecorator={
+            <Box
+              sx={{
+                display: "flex",
+                gap: "var(--Textarea-paddingBlock)",
+                pt: "var(--Textarea-paddingBlock)",
+                borderTop: "1px solid",
+                borderColor: "divider",
+                flex: "auto",
+              }}
             >
-              <FormatBold />
-              <KeyboardArrowDown fontSize="md" />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={() => setAnchorEl(null)}
-              size="sm"
-              placement="bottom-start"
-              sx={{ "--ListItemDecorator-size": "24px" }}
+              <IconButton
+                variant="plain"
+                color="neutral"
+                onClick={(event) => setAnchorEl(event.currentTarget)}
+              >
+                <FormatBold />
+                <KeyboardArrowDown fontSize="md" />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+                size="sm"
+                placement="bottom-start"
+                sx={{ "--ListItemDecorator-size": "24px" }}
+              >
+                {["200", "normal", "bold"].map((weight) => (
+                  <MenuItem
+                    key={weight}
+                    selected={fontWeight === weight}
+                    onClick={() => {
+                      setFontWeight(weight);
+                      setAnchorEl(null);
+                    }}
+                    sx={{ fontWeight: weight }}
+                  >
+                    <ListItemDecorator>
+                      {fontWeight === weight && <Check fontSize="sm" />}
+                    </ListItemDecorator>
+                    {weight === "200" ? "lighter" : weight}
+                  </MenuItem>
+                ))}
+              </Menu>
+              <IconButton
+                variant={italic ? "soft" : "plain"}
+                color={italic ? "primary" : "neutral"}
+                aria-pressed={italic}
+                onClick={() => setItalic((bool) => !bool)}
+              >
+                <FormatItalic />
+              </IconButton>
+              <Button onClick={() => handleSubmit(articleId)}>Submit</Button>
+            </Box>
+          }
+          sx={{
+            minWidth: 300,
+            fontWeight,
+            fontStyle: italic ? "italic" : "initial",
+          }}
+        />
+      </FormControl>
+
+      {commentDetails.map((commentDetail) => {
+        return (
+          <div key={commentDetail.id}>
+            <img id="comment-placeholder" src="https://picsum.photos/50/50" />
+            <p className="comment-tag">{commentDetail.comment}</p>
+            <button onClick={() => updateComment(commentDetail.id)}>
+              Edit
+            </button>
+            <button
+              onClick={() =>
+                dispatch({ type: "DELETE_COMMENT", payload: commentDetail.id })
+              }
             >
-              {["200", "normal", "bold"].map((weight) => (
-                <MenuItem
-                  key={weight}
-                  selected={fontWeight === weight}
-                  onClick={() => {
-                    setFontWeight(weight);
-                    setAnchorEl(null);
-                  }}
-                  sx={{ fontWeight: weight }}
-                >
-                  <ListItemDecorator>
-                    {fontWeight === weight && <Check fontSize="sm" />}
-                  </ListItemDecorator>
-                  {weight === "200" ? "lighter" : weight}
-                </MenuItem>
-              ))}
-            </Menu>
-            <IconButton
-              variant={italic ? "soft" : "plain"}
-              color={italic ? "primary" : "neutral"}
-              aria-pressed={italic}
-              onClick={() => setItalic((bool) => !bool)}
-            >
-              <FormatItalic />
-            </IconButton>
-            <Button onClick={() => handleSubmit(articleId)}>Submit</Button>
-          </Box>
-        }
-        sx={{
-          minWidth: 300,
-          fontWeight,
-          fontStyle: italic ? "italic" : "initial",
-        }}
-      />
-    </FormControl>
+              Delete
+            </button>
+          </div>
+        );
+      })}
+    </>
   );
 }
 
