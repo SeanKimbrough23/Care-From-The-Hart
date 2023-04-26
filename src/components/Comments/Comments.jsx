@@ -7,10 +7,12 @@ import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import IconButton from "@mui/joy/IconButton";
 import { useEffect, useState } from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector, useDispatch } from "react-redux";
 import Menu from "@mui/joy/Menu";
 import { Typography } from "@mui/material";
 import CommentReplys from "./CommentReplys";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./Comments.css";
 import MenuItem from "@mui/joy/MenuItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
@@ -34,7 +36,7 @@ function TextareaValidator({ articleId }) {
       type: "FETCH_COMMENTS",
     });
   };
-  const updateComment = () => {
+  const updateComment = (commentId) => {
     dispatch({
       type: "UPDATE_COMMENT",
       // using payload to tell route which comment id to target and it is apart of the body and URL
@@ -67,14 +69,20 @@ function TextareaValidator({ articleId }) {
       articles_id: articleId,
       comment: comment,
     };
-    console.log("🥰", articleComment); // Replace with your own logic to submit the comment
+    console.log("🥰", articleComment);
     dispatch({ type: "POST_NEW_COMMENT", payload: articleComment });
   };
 
   useEffect(() => {
     getCommentDetails();
   }, []);
-  console.log("🤩", commentDetails);
+
+  // This effect will run whenever `commentDetails` changes
+  useEffect(() => {
+    if (commentDetails.length > 0) {
+      console.log("comment details changed: ", commentDetails);
+    }
+  }, [commentDetails]);
 
   return (
     <>
@@ -153,16 +161,28 @@ function TextareaValidator({ articleId }) {
           <div key={commentDetail.id}>
             <img id="comment-placeholder" src="https://picsum.photos/50/50" />
             <p className="comment-tag">{commentDetail.comment}</p>
-            <button onClick={() => updateComment(commentDetail.id)}>
-              Edit
-            </button>
-            <button
+            <IconButton
+              className="primary"
+              onClick={() =>
+                dispatch({
+                  type: "UPDATE_COMMENT",
+                  payload: {
+                    commentId: commentDetail.id,
+                    newLikeCount: commentDetail.likes + 1,
+                  },
+                })
+              }
+            >
+              <FavoriteIcon color="primary" /> ({commentDetail.likes})
+            </IconButton>
+            <IconButton
+              className="inherit"
               onClick={() =>
                 dispatch({ type: "DELETE_COMMENT", payload: commentDetail.id })
               }
             >
-              Delete
-            </button>
+              <DeleteIcon color="inherit" />
+            </IconButton>
           </div>
         );
       })}

@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import Button from "@mui/material/Button";
+import ImageAvatars from "../ImageAvatars";
 import { HashRouter as Router, Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
@@ -28,6 +29,7 @@ function ResponsiveAppBar() {
       <AppBar position="relative" sx={{ backgroundColor: "green" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* <ImageAvatars /> */}
             <VolunteerActivismSharpIcon
               sx={{
                 color: "#FF91a4",
@@ -41,7 +43,6 @@ function ResponsiveAppBar() {
               component="a"
               href="/"
               sx={{
-                mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
@@ -52,7 +53,7 @@ function ResponsiveAppBar() {
             >
               CARE FROM THE HART
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box sx={{ display: { xs: "none", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"

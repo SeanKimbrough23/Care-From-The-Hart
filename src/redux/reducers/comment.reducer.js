@@ -10,5 +10,29 @@ const commentDetails = (state = [], action) => {
       return state;
   }
 };
+const updateLikes = (state = {}, action) => {
+  switch (action.type) {
+    case "UPDATE_LIKE_COUNT":
+      const commentIndex = state.commentDetails.findIndex(
+        (comment) => comment.id === action.payload.commentId
+      );
+      const updatedComment = {
+        ...state.commentDetails[commentIndex],
+        likes: action.payload.newLikeCount,
+      };
+      const updatedCommentDetails = [...state.commentDetails];
+      updatedCommentDetails[commentIndex] = updatedComment;
+      return { ...state, commentDetails: updatedCommentDetails };
+  }
+};
 
+const addComment = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_COMMENT":
+      return {
+        ...state,
+        commentDetails: [...state.commentDetails, action.payload],
+      };
+  }
+};
 export default commentDetails;

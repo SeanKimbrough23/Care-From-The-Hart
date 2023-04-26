@@ -22,12 +22,13 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 router.post("/", rejectUnauthenticated, (req, res) => {
   //req.user
   console.log("inside comment router.post", req.body);
-  const insertCommentQuery = `INSERT INTO "comments" ("articles_id","user_id","comment") VALUES ($1, $2, $3) RETURNING "id";`;
+  const insertCommentQuery = `INSERT INTO "comments" ("articles_id","user_id","comment", "likes") VALUES ($1, $2, $3, $4) RETURNING "id";`;
   pool
     .query(insertCommentQuery, [
       req.body.articles_id,
       req.user.id,
       req.body.comment,
+      0,
     ])
     .then((result) => {
       console.log("Comment", result.rows[0].id);
@@ -43,17 +44,11 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 // put request
 router.put("/:id", rejectUnauthenticated, (req, res) => {
   console.log("inside PUT request", req.body);
-  const updatedComment = req.body;
-  const queryText = `UPDATE "comments" SET "comment" = $1 WHERE "id" = $2 AND "user_id" = $3 AND "articles_id" = $4;`;
+  const queryText = `UPDATE "comments" SET "likes" = $1 WHERE "id" = $2`;
   const userId = req.user.id;
   console.log("checking query", queryText);
   pool
-    .query(queryText, [
-      updatedComment.comment,
-      //req.params.id,
-      userId,
-      articlesId,
-    ])
+    .query(queryText, [req.body.newLikeCount, req.params.id])
     .then((result) => {
       //Now that both are done, send back success!
       res.sendStatus(201);

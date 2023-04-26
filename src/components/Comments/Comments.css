@@ -3,3 +3,10 @@
   padding: 10px;
   border-radius: 10px;
 }
+.primary {
+  color: green;
+}
+
+.inherit {
+  color: green;
+}
