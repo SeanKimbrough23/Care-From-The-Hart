@@ -36,10 +36,10 @@ const ExpandMore = styled((props) => {
 }));
 
 function AboutPage() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false); // the id of the thing youre expanding
   const [likeCount, setLikeCount] = React.useState(0);
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setExpanded(!expanded); // setExpanded(id of thing)
   };
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
@@ -88,8 +88,8 @@ function AboutPage() {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
+            expand={expanded} // should be expanded === 'card1'
+            onClick={() => handleExpandClick("card1")}
             aria-expanded={expanded}
             aria-label="show more"
           >

@@ -24,6 +24,9 @@ function* handleCommentSubmit(action) {
       `/api/comment/new`,
       action.payload
     );
+    yield put({
+      type: "FETCH_COMMENTS",
+    });
     console.log("article comments saga", articleComments);
     yield put({
       type: "SET_ARTICLE_COMMENTS",

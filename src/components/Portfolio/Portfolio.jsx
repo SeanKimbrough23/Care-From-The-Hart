@@ -9,7 +9,8 @@ import CommentReplys from "../Comments/CommentReplys";
 import { Typography } from "@mui/material";
 import TextareaValidator from "../Comments/Comments";
 import ArticleIcon from "@mui/icons-material/Article";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+//import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CommentInput from "../Comments/CommentInput";
 
 const style = {
@@ -99,60 +100,62 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="grid">
-      {articleDetails.length > 0 ? (
-        articleDetails.map((article, index) => (
-          <div key={article.id} className="card">
-            <ArticleIcon
-              onClick={() => handleOpen(index)}
-              sx={{
-                backgroundColor: "lightpink",
-                margin: 5,
-                padding: 10,
-                fontSize: "extralarge",
-              }}
-            >
-              <OpenInNewIcon />
-            </ArticleIcon>
-            <Modal
-              open={modalOpen[index]}
-              onClose={() => handleClose(index)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {article.title}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {article.content}
-                </Typography>
-                <a href={article.link}>Link to Full Article</a>
-                <TextareaValidator articleId={article.id} />
-                <div style={{ marginTop: "1rem" }}>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={() => toggleCommentReplys(index)}
+    <>
+      <h1>Portfolio</h1>
+      <div className="grid">
+        {" "}
+        {articleDetails.length > 0 ? (
+          articleDetails.map((article, index) => (
+            <div key={article.id} className="card">
+              <div className="article-image" onClick={() => handleOpen(index)}>
+                <OpenInFullIcon />
+              </div>
+              <Modal
+                open={modalOpen[index]}
+                onClose={() => handleClose(index)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
                   >
-                    {commentReplysOpen[index] ? "Hide Replies" : "Show Replies"}
-                  </Button>
-                </div>
-                {/* {commentReplysOpen[index] && (
+                    {article.title}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    {article.content}
+                  </Typography>
+                  <a href={article.link}>Link to Full Article</a>
+                  <TextareaValidator articleId={article.id} />
+                  <div style={{ marginTop: "1rem" }}>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => toggleCommentReplys(index)}
+                    >
+                      {commentReplysOpen[index]
+                        ? "Hide Replies"
+                        : "Show Replies"}
+                    </Button>
+                  </div>
+                  {/* {commentReplysOpen[index] && (
                   <CommentReplys
                     open={commentReplysOpen[index]}
                     onClose={() => handleClose(index)}
                     sx={{ maxHeight: 100 }} // set the maximum height of the CommentReplys to 400px
                   />
                 )} */}
-              </Box>
-            </Modal>
-          </div>
-        ))
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
+                </Box>
+              </Modal>
+            </div>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+    </>
   );
 };
 
