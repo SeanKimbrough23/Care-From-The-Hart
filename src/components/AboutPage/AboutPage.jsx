@@ -36,18 +36,28 @@ const ExpandMore = styled((props) => {
 }));
 
 function AboutPage() {
-  const [expanded, setExpanded] = React.useState(false); // the id of the thing youre expanding
+  const [cardStates, setCardStates] = React.useState({
+    card1: false,
+    card2: false,
+    card3: false,
+    card4: false,
+  });
+  //const [expanded, setExpanded] = React.useState(false); // the id of the thing youre expanding
   const [likeCount, setLikeCount] = React.useState(0);
-  const handleExpandClick = () => {
-    setExpanded(!expanded); // setExpanded(id of thing)
+  const handleExpandClick = (cardId) => {
+    setCardStates({ ...cardStates, [cardId]: !cardStates[cardId] }); // setExpanded(id of thing)
   };
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
   };
 
   return (
-    <div className="card-container">
+    <div
+      className="card-container"
+      style={{ overflowY: "scroll", height: "100vh", scrollTop: 0 }}
+    >
       <Card
+        id="card1"
         sx={{
           backgroundColor: "lightpink",
           maxWidth: 200,
@@ -88,15 +98,15 @@ function AboutPage() {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            expand={expanded} // should be expanded === 'card1'
+            expand={cardStates["card1"]} // should be expanded === 'card1'
             onClick={() => handleExpandClick("card1")}
-            aria-expanded={expanded}
+            aria-expanded={cardStates["card1"]}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={cardStates["card1"]} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
@@ -130,6 +140,7 @@ function AboutPage() {
         </Collapse>
       </Card>
       <Card
+        id="card2"
         sx={{
           backgroundColor: "lightgreen",
           maxWidth: 200,
@@ -170,15 +181,15 @@ function AboutPage() {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
+            expand={cardStates["card2"]}
+            onClick={() => handleExpandClick("card2")}
+            aria-expanded={cardStates["card2"]}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={cardStates["card2"]} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
@@ -212,6 +223,7 @@ function AboutPage() {
         </Collapse>
       </Card>
       <Card
+        id="card3"
         sx={{
           backgroundColor: "lightpink",
           maxWidth: 200,
@@ -257,15 +269,15 @@ function AboutPage() {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
+            expand={cardStates["card3"]}
+            onClick={() => handleExpandClick("card3")}
+            aria-expanded={cardStates["card3"]}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={cardStates["card3"]} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
@@ -299,6 +311,7 @@ function AboutPage() {
         </Collapse>
       </Card>
       <Card
+        id="card4"
         sx={{
           backgroundColor: "lightgreen",
           maxWidth: 200,
@@ -339,15 +352,15 @@ function AboutPage() {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
+            expand={cardStates["card4"]} // should be expanded === 'card1'
+            onClick={() => handleExpandClick("card4")}
+            aria-expanded={cardStates["card4"]}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={cardStates["card4"]} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
