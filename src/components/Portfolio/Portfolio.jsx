@@ -110,6 +110,7 @@ const Portfolio = () => {
               <div className="article-image" onClick={() => handleOpen(index)}>
                 <OpenInFullIcon />
               </div>
+              <h2 className="card-title">{article.title}</h2>
               <Modal
                 open={modalOpen[index]}
                 onClose={() => handleClose(index)}
@@ -121,6 +122,7 @@ const Portfolio = () => {
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"
+                    sx={{ borderBottom: "4px solid #ddd", pb: 1, mb: 2 }}
                   >
                     {article.title}
                   </Typography>

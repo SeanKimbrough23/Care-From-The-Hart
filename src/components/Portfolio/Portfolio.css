@@ -55,3 +55,15 @@ h1 {
   text-shadow: -2px -2px 0 pink, 2px -2px 0 pink, -2px 2px 0 pink,
     2px 2px 0 pink, 2px 0 0 pink, 0 2px 0 pink, -2px 0 0 pink, 0 -2px 0 pink;
 }
+.card-title {
+  padding: 2rem;
+  margin-bottom: 2;
+  font-size: 5px;
+  font-style: inherit;
+  text-align: center;
+  color: black;
+  background-color: white;
+  padding: 3px;
+  margin: 0;
+  border-radius: 5px 5px 5px 5px;
+}
