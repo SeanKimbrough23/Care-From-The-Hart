@@ -12,7 +12,7 @@ const Calendar = () => {
   const [option, setOption] = useState({}); // add a state variable to hold the calendar options
 
   const handleDateClick = (arg) => {
-    alert(arg.dateStr);
+    alert("Blacked out dates are unavailable");
   };
 
   const handleEventClick = (arg) => {
@@ -22,7 +22,7 @@ const Calendar = () => {
   // define a function to update the calendar options
   const updateOptions = () => {
     setOption({
-      weekends: false, // disable weekends
+      weekends: true, // enable weekends
       datesSet: (info) => {
         console.log("Calendar starting date:", info.startStr);
       },
@@ -38,6 +38,14 @@ const Calendar = () => {
           start: "2023-05-02T13:00:00",
           end: "2023-05-02T15:00:00",
         },
+        {
+          title: "Block",
+          start: "2023-05-07",
+          end: "2023-05-10",
+          display: "background",
+          color: "black",
+          classNames: "block-dates",
+        },
       ],
     });
   };
@@ -45,7 +53,7 @@ const Calendar = () => {
   return (
     <div>
       <h1 className="Calendar" color="#FF91a4">
-        Calendar
+        AVAILABILITY
       </h1>
       <Fullcalendar
         eventBackgroundColor="pink"
@@ -64,8 +72,7 @@ const Calendar = () => {
         height={"90vh"}
         {...option} // spread the options object to the Fullcalendar component
       />
-      <Button onClick={updateOptions}>Update Options</Button> // add a button to
-      update the calendar options
+      <Button onClick={updateOptions}>Update Options</Button>
       <Link
         to="/Booking"
         style={{

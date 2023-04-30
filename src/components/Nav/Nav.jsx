@@ -129,6 +129,14 @@ function ResponsiveAppBar() {
                   <Button variant="inherit">Booking Request</Button>
                 </Link>
               </Router>
+              {/* <Router>
+                <Link
+                  to="/Pending"
+                  style={{ textDecoration: "none", color: "#FF91a4" }}
+                >
+                  <Button variant="inherit">Pending Request</Button>
+                </Link>
+              </Router> */}
               <Router>
                 <Link
                   to="/adminhome"

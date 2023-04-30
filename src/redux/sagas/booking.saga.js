@@ -8,10 +8,54 @@ function* fetchBookings(action) {
     const bookingDetails = yield axios.get(`/api/booking`);
     console.log("booking saga", bookingDetails);
     yield put({
-      type: "SET_BOOKING",
+      type: "SET_BOOKINGS",
       payload: bookingDetails.data,
     });
   } catch (error) {
     console.log("get booking error", error);
   }
 }
+
+function* handleBookingSubmit(action) {
+  console.log("action for submitting bookings", action);
+  // get bookings
+  try {
+    const bookingRequests = yield axios.post(
+      `/api/booking/new`,
+      action.payload
+    );
+    yield put({
+      type: "FETCH_BOOKINGS",
+    });
+    console.log("bookings saga", bookingRequests);
+    yield put({
+      type: "SET_BOOKINGS",
+      payload: bookingRequests.data,
+    });
+  } catch (error) {
+    console.log("get bookings  error", error);
+  }
+}
+
+function* bookingWatcherSaga() {
+  // trigger saga to GET Article
+  yield takeEvery("FETCH_BOOKINGS", fetchBookings);
+  yield takeEvery("POST_NEW_BOOKING", handleBookingSubmit);
+}
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await axios.post("/api/bookings", RequestBooking);
+    console.log(response.data);
+    // assuming your backend responds with the created booking object
+    dispatch({ type: "POST_NEW_BOOKING", payload: response.data });
+  } catch (error) {
+    console.error(error);
+  }
+
+  setBooking("");
+};
+
+export default commentWatcherSaga;

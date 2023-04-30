@@ -36,6 +36,7 @@ function* handleCommentSubmit(action) {
     console.log("get comments error", error);
   }
 }
+
 function* updateComment(action) {
   try {
     const articleComments = yield axios.put(
