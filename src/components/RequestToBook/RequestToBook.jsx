@@ -67,12 +67,8 @@ const RequestToBook = () => {
       RequestBooking.Request
     ) {
       console.log("🤪");
-      dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails }).then(
-        () => {
-          thankYouPrompt();
-          // getPendingRequests();
-        }
-      );
+      dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails });
+      thankYouPrompt();
     } else {
       // Alert user that all fields are required
       alert("Please fill out all required fields.");
@@ -81,7 +77,6 @@ const RequestToBook = () => {
 
   useEffect(() => {
     getBookingDetails();
-    // getPendingRequests();
   }, []);
 
   return (
