@@ -12,13 +12,15 @@ const RequestToBook = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const [booking, setBooking] = useState("");
+  const [newBooking, setNewBooking] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const bookingDetails = useSelector((store) => store.commentDetails);
+  const bookingDetails = useSelector((store) => store.bookingDetails);
+  const user = useSelector((store) => store.user);
   const [RequestBooking, setRequestBooking] = useState({
     Dates: "",
     Name: "",
     Email: "",
+    Request: "",
   });
 
   //ability for user to go back to About Me page
@@ -27,14 +29,12 @@ const RequestToBook = () => {
   };
 
   const thankYouPrompt = () => {
-    swal
-      .fire({
-        title:
-          "Thank You for your request, I will answer your request at my earliest convenience",
-      })
-      .then(() => {
-        history.push("/home");
-      });
+    Swal.fire({
+      title:
+        "Thank You for your request, I will answer your request at my earliest convenience",
+    }).then(() => {
+      history.push("/home");
+    });
   };
 
   const [displayMissingFieldsMessage, setMissingFieldsMessage] =
@@ -50,11 +50,12 @@ const RequestToBook = () => {
     event.preventDefault();
     setBooking("");
     let bookingDetails = {
-      user_Id: user.Id,
-      date: date,
-      email: email,
-      request: request,
+      user_id: user.id,
+      date: RequestBooking.Dates,
+      email: RequestBooking.Email,
+      request: RequestBooking.Request,
     };
+    console.log("inside handle submit for booking", bookingDetails);
     dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails });
   };
 
@@ -123,11 +124,17 @@ const RequestToBook = () => {
             <TextField
               id="outlined-multiline-static"
               label="Request"
+              placeholder="Request"
               multiline
               required
               rows={10}
-              value={booking}
-              onChange={(event) => setBooking(event.target.value)}
+              value={RequestBooking.Request}
+              onChange={(event) =>
+                setRequestBooking({
+                  ...RequestBooking,
+                  Request: event.target.value,
+                })
+              }
             />
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <Button

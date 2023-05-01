@@ -28,10 +28,10 @@ function* handleBookingSubmit(action) {
       type: "FETCH_BOOKINGS",
     });
     console.log("bookings saga", bookingRequests);
-    yield put({
-      type: "SET_BOOKINGS",
-      payload: bookingRequests.data,
-    });
+    // yield put({
+    //   type: "SET_BOOKINGS",
+    //   payload: bookingRequests.data,
+    // });
   } catch (error) {
     console.log("get bookings  error", error);
   }
@@ -58,4 +58,4 @@ const handleSubmit = async (event) => {
   setBooking("");
 };
 
-export default commentWatcherSaga;
+export default bookingWatcherSaga;
