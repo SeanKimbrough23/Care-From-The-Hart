@@ -12,6 +12,7 @@ import TextareaValidator from "../Comments/Comments";
 import RequestToBook from "../RequestToBook/RequestToBook";
 import PendingRequestsForm from "../PendingRequests/PendingRequests";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ThankYou from "../Thankyou/ThankYou";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -79,6 +80,9 @@ const App = () => {
 
           <Route path="/Calendar">
             <Calendar />{" "}
+          </Route>
+          <Route path="/ThankYou">
+            <ThankYou />{" "}
           </Route>
           <Route path="/Portfolio">
             <Portfolio />{" "}

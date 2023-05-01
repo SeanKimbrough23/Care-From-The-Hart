@@ -29,12 +29,12 @@ const Calendar = () => {
       events: [
         // define events to be displayed on the calendar
         {
-          title: "Event 1",
+          title: "Conference",
           start: "2023-05-01T10:00:00",
           end: "2023-05-01T12:00:00",
         },
         {
-          title: "Event 2",
+          title: "Conference",
           start: "2023-05-02T13:00:00",
           end: "2023-05-02T15:00:00",
         },
@@ -42,6 +42,22 @@ const Calendar = () => {
           title: "Block",
           start: "2023-05-07",
           end: "2023-05-10",
+          display: "background",
+          color: "black",
+          classNames: "block-dates",
+        },
+        {
+          title: "Block",
+          start: "2023-05-21",
+          end: "2023-05-26",
+          display: "background",
+          color: "black",
+          classNames: "block-dates",
+        },
+        {
+          title: "Block",
+          start: "2023-05-29",
+          end: "2023-05-31",
           display: "background",
           color: "black",
           classNames: "block-dates",
