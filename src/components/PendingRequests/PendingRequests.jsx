@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useState } from "react";
+import "./PendingRequests.css";
+
 //import { Box, TextField, Button, Typography } from "@mui/material";
 
 // // const PendingRequestsForm = () => {};
@@ -14,7 +16,7 @@ const PendingRequestsForm = (event) => {
   //   setLastName("");
   return (
     <form>
-      <h2>Pending Requests</h2>
+      <h3>Pending Requests</h3>
     </form>
   );
 };

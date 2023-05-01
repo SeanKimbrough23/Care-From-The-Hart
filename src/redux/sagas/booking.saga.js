@@ -16,6 +16,17 @@ function* fetchBookings(action) {
   }
 }
 
+// function* pendingBookings(action) {
+//   try {
+//     const pendingBooking = yield axios.post(`/api/booking/new`, action.payload);
+//     yield put({
+//       type: "FETCH_PENDING_REQUESTS",
+//     });
+//   } catch (error) {
+//     console.log("error getting pending", error);
+//   }
+// }
+
 function* handleBookingSubmit(action) {
   console.log("action for submitting bookings", action);
   // get bookings
@@ -41,6 +52,7 @@ function* bookingWatcherSaga() {
   // trigger saga to GET Article
   yield takeEvery("FETCH_BOOKINGS", fetchBookings);
   yield takeEvery("POST_NEW_BOOKING", handleBookingSubmit);
+  //yield takeEvery("FETCH_PENDING_REQUESTS", pendingBookings);
 }
 
 const handleSubmit = async (event) => {

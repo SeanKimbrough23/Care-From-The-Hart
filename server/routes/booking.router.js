@@ -27,6 +27,19 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// router.get("/", rejectUnauthenticated, (req, res) => {
+//   const pendingRequestsQuery = `SELECT * FROM booking ORDER BY "id"`;
+//   pool
+//     .query(query)
+//     .then((results) => {
+//       res.send(result.rows);
+//     })
+//     .catch((error) => {
+//       console.log("Error with pending router", error);
+//       res.sendStatus(500);
+//     });
+// });
+
 router.get("/", rejectUnauthenticated, (req, res) => {
   console.log("inside booking router.get");
   const query = `SELECT * FROM booking ORDER BY "id"`;

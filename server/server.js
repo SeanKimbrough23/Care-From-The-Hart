@@ -32,6 +32,7 @@ app.use("/api/articles", articlesRouter);
 app.use("/api/comment/new", commentsRouter);
 app.use("/api/booking", bookingRouter);
 app.use("/api/booking/new", bookingRouter);
+//app.use("/api/booking/requests", bookingRouter);
 // Serve static files
 app.use(express.static("build"));
 

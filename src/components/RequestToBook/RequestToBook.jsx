@@ -23,6 +23,7 @@ const RequestToBook = () => {
     Email: "",
     Request: "",
   });
+  // const [pendingRequests, setPendingRequests] = useState([]);
 
   //ability for user to go back to About Me page
   const goToPreviousPage = () => {
@@ -44,6 +45,14 @@ const RequestToBook = () => {
     });
   };
 
+  // const getPendingRequests = () => {
+  //   dispatch({
+  //     type: "FETCH_PENDING_REQUESTS",
+  //   }).then((res) => {
+  //     setPendingRequests(res.data);
+  //   });
+  // };
+
   const handleSubmit = async (event) => {
     let bookingDetails = {
       user_id: user.id,
@@ -58,8 +67,12 @@ const RequestToBook = () => {
       RequestBooking.Request
     ) {
       console.log("🤪");
-      dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails }),
-        thankYouPrompt();
+      dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails }).then(
+        () => {
+          thankYouPrompt();
+          // getPendingRequests();
+        }
+      );
     } else {
       // Alert user that all fields are required
       alert("Please fill out all required fields.");
@@ -68,6 +81,7 @@ const RequestToBook = () => {
 
   useEffect(() => {
     getBookingDetails();
+    // getPendingRequests();
   }, []);
 
   return (
@@ -82,6 +96,7 @@ const RequestToBook = () => {
               "& .MuiTextField-root": { m: 1, width: "25ch" },
               maxXidth: "500px",
               margin: "auto",
+              justifyContent: "center",
             }}
             noValidate
             autoComplete="off"
