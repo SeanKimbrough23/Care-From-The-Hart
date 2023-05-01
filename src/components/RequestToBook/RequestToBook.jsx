@@ -36,12 +36,12 @@ const RequestToBook = () => {
     }).then(() => {
       history.push("/AboutMe");
     });
+  };
 
-    const getBookingDetails = () => {
-      dispatch({
-        type: "FETCH_BOOKINGS",
-      });
-    };
+  const getBookingDetails = () => {
+    dispatch({
+      type: "FETCH_BOOKINGS",
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -60,12 +60,16 @@ const RequestToBook = () => {
       console.log("🤪");
       dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails }),
         thankYouPrompt();
+    } else {
+      // Alert user that all fields are required
+      alert("Please fill out all required fields.");
     }
-
-    useEffect(() => {
-      getBookingDetails();
-    }, []);
   };
+
+  useEffect(() => {
+    getBookingDetails();
+  }, []);
+
   return (
     <>
       <h1>Booking Requests</h1>
@@ -98,21 +102,21 @@ const RequestToBook = () => {
               }
             />
             {/* <TextField
-            id="outlined-textarea"
-            label="Name"
-            placeholder="Name"
-            required
-            multiline
-            value={RequestBooking.Name}
-            onChange={(event) =>
-              setRequestBooking({
-                ...RequestBooking,
-                Name: event.target.value,
-              })
-            }
-          /> */}
+          id="outlined-textarea"
+          label="Name"
+          placeholder="Name"
+          required
+          multiline
+          value={RequestBooking.Name}
+          onChange={(event) =>
+            setRequestBooking({
+              ...RequestBooking,
+              Name: event.target.value,
+            })
+          }
+        /> */}
             <TextField
-              id="outlined-textarea"
+              id="outlined-text"
               label="Email"
               placeholder="Email"
               required

@@ -101,7 +101,7 @@ const Portfolio = () => {
 
   return (
     <>
-      <h1>Portfolio</h1>
+      <h1>PORTFOLIO</h1>
       <div className="grid">
         {" "}
         {articleDetails.length > 0 ? (
