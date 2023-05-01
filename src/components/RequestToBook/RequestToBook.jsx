@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { useParams, useHistory } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+//import { makeStyles } from "@mui/styles";
 import PendingRequestsForm from "../PendingRequests/PendingRequests";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
@@ -13,7 +14,7 @@ const RequestToBook = () => {
   const history = useHistory();
   const { id } = useParams();
   const [newBooking, setNewBooking] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const bookingDetails = useSelector((store) => store.bookingDetails);
   const user = useSelector((store) => store.user);
   const [RequestBooking, setRequestBooking] = useState({
@@ -33,35 +34,38 @@ const RequestToBook = () => {
       title:
         "Thank You for your request, I will answer your request at my earliest convenience",
     }).then(() => {
-      history.push("/home");
+      history.push("/AboutMe");
     });
-  };
 
-  const [displayMissingFieldsMessage, setMissingFieldsMessage] =
-    useState(false);
-
-  const getBookingDetails = () => {
-    dispatch({
-      type: "FETCH_BOOKINGS",
-    });
+    const getBookingDetails = () => {
+      dispatch({
+        type: "FETCH_BOOKINGS",
+      });
+    };
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setBooking("");
     let bookingDetails = {
       user_id: user.id,
       date: RequestBooking.Dates,
       email: RequestBooking.Email,
       request: RequestBooking.Request,
     };
-    console.log("inside handle submit for booking", bookingDetails);
-    dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails });
-  };
+    // Check if all required input fields are filled out
+    if (
+      RequestBooking.Dates &&
+      RequestBooking.Email &&
+      RequestBooking.Request
+    ) {
+      console.log("🤪");
+      dispatch({ type: "POST_NEW_BOOKING", payload: bookingDetails }),
+        thankYouPrompt();
+    }
 
-  useEffect(() => {
-    getBookingDetails();
-  }, []);
+    useEffect(() => {
+      getBookingDetails();
+    }, []);
+  };
   return (
     <>
       <h1>Booking Requests</h1>
@@ -155,7 +159,7 @@ const RequestToBook = () => {
               </Button>
 
               <Button
-                onClick={() => handleSubmit(event)}
+                onClick={(event) => handleSubmit(event)}
                 sx={{
                   backgroundColor: "#FF91a4",
                   color: "green",
@@ -174,9 +178,9 @@ const RequestToBook = () => {
               </Button>
             </Box>
           </Box>
-          <form>
+          <>
             <PendingRequestsForm></PendingRequestsForm>
-          </form>
+          </>
         </div>
       </div>
     </>
