@@ -116,15 +116,6 @@ function AboutPage() {
               me to pursue my dream to become a physician.
             </Typography>
             <Typography paragraph>
-              Becoming director of Care From the Hart, an organization that
-              provides patient advocacy and psychiatric services in Chicago and
-              Rochester, Minnesota. I was elected as the first chair of the AMA
-              Minority Affairs Section and was the first African-American woman
-              to be elected to the Minnesota Medical Association’s board of
-              trustees. She was also named the Minnesota Psychiatric Society
-              Psychiatrist of the Year.
-            </Typography>
-            <Typography paragraph>
               I didn’t have a straight path to medicine. At 20, I was divorced
               with three small children. In the African-American community,
               elders often say, “God doesn’t give you more than you can handle.”
@@ -169,8 +160,8 @@ function AboutPage() {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Dionne Hart, MD, a specialist in addiction medicine and psychiatry
-            who advocates for people with mental illnesses.
+            Dr. Dionne Hart is a lifelong resident of Illinois. She received her
+            undergradute degree in psychology from the University of Chicago.
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -192,11 +183,17 @@ function AboutPage() {
         <Collapse in={cardStates["card2"]} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Biography:</Typography>
+
             <Typography paragraph>
-              I remember the toy doctor’s bag my dad gave me for my fifth
-              birthday. He grew up during the Jim Crow era so being a physician
-              wasn’t a dream he was able to pursue. He inspired and encouraged
-              me to pursue my dream to become a physician.
+              After working as a social worker on Chicago's west side, Dr. Hart
+              earned a medical degree. In 2003, she completed a residency in
+              psychiatry at the Mayo Clinic in Rochester, MN. She is
+              board-certified in psychiatry and addiction medicine. After
+              residency, she chose the Federal Medical Center, Rochester as her
+              site to fulfill a service commitment to the National Health
+              Service Corps. She elected to remain on staff. She is an adjunct
+              assistant professor of psychiatry at Mayo Clinic College of
+              Medicine and Science
             </Typography>
             <Typography paragraph>
               Becoming director of Care From the Hart, an organization that
@@ -207,18 +204,7 @@ function AboutPage() {
               trustees. She was also named the Minnesota Psychiatric Society
               Psychiatrist of the Year.
             </Typography>
-            <Typography paragraph>
-              I didn’t have a straight path to medicine. At 20, I was divorced
-              with three small children. In the African-American community,
-              elders often say, “God doesn’t give you more than you can handle.”
-              In my opinion, God doesn't give more than a community can handle.
-              I earned a degree at the University of Chicago and completed a
-              residency at Mayo Clinic by accepting help from others and
-              persisting even when told that my goals were impossible. All of
-              three of my children earned college degrees as well as two
-              graduate degrees. My personal motto: Let your haters be your
-              motivators! Persist!
-            </Typography>
+            <Typography paragraph></Typography>
           </CardContent>
         </Collapse>
       </Card>
@@ -257,8 +243,8 @@ function AboutPage() {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Dionne Hart, MD, a specialist in addiction medicine and psychiatry
-            who advocates for people with mental illnesses.
+            Throughout her career, Dr. Hart has earned multiple awards and
+            recognitions, including recognition by Governor Tim Walz.
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -281,31 +267,15 @@ function AboutPage() {
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
-              I remember the toy doctor’s bag my dad gave me for my fifth
-              birthday. He grew up during the Jim Crow era so being a physician
-              wasn’t a dream he was able to pursue. He inspired and encouraged
-              me to pursue my dream to become a physician.
-            </Typography>
-            <Typography paragraph>
-              Becoming director of Care From the Hart, an organization that
-              provides patient advocacy and psychiatric services in Chicago and
-              Rochester, Minnesota. I was elected as the first chair of the AMA
-              Minority Affairs Section and was the first African-American woman
-              to be elected to the Minnesota Medical Association’s board of
-              trustees. She was also named the Minnesota Psychiatric Society
-              Psychiatrist of the Year.
-            </Typography>
-            <Typography paragraph>
-              I didn’t have a straight path to medicine. At 20, I was divorced
-              with three small children. In the African-American community,
-              elders often say, “God doesn’t give you more than you can handle.”
-              In my opinion, God doesn't give more than a community can handle.
-              I earned a degree at the University of Chicago and completed a
-              residency at Mayo Clinic by accepting help from others and
-              persisting even when told that my goals were impossible. All of
-              three of my children earned college degrees as well as two
-              graduate degrees. My personal motto: Let your haters be your
-              motivators! Persist!
+              In 2014, Dr. Hart was named Minnesota Psychiatrist of the Year. In
+              2017, she received the National Alliance on Mental Illness
+              Exemplary Psychiatrist Award. In 2020, Minnesota Physician journal
+              named her one of the 100 most influential healthcare leaders in
+              Minnesota. In 2022, Dr. Hart was recognized by the Minnesota
+              African American Heritage Calendar Committee and Minnesota
+              Governor Tim Walz. Awardees were visionary women who have gifts,
+              talents, and span of service in Minnesota. In 2023, Dr. Hart was
+              selected at the Chief of Psychiatry at FMC Rochester.
             </Typography>
           </CardContent>
         </Collapse>
@@ -340,8 +310,8 @@ function AboutPage() {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Dionne Hart, MD, a specialist in addiction medicine and psychiatry
-            who advocates for people with mental illnesses.
+            Dionne Hart, MD, has held and currently holds multiple positions on
+            several professional committees in the medical community.
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -364,32 +334,18 @@ function AboutPage() {
           <CardContent>
             <Typography paragraph>Biography:</Typography>
             <Typography paragraph>
-              I remember the toy doctor’s bag my dad gave me for my fifth
-              birthday. He grew up during the Jim Crow era so being a physician
-              wasn’t a dream he was able to pursue. He inspired and encouraged
-              me to pursue my dream to become a physician.
+              Dr. Hart holds local, state, and national leadership positions.
+              Dr. Hart is the Region 4 chairperson of the National Medical
+              Association and President of the Minnesota Association of African
+              American Physicians. She was the inaugural chair of the AMA’s
+              Minority Affairs Section. She currently serves as an APA delegate
+              to the AMA House of Delegates, and the AMA liaison to the National
+              Commission on Correctional Health Care Board of Representatives.
+              In 2020, Minnesota Physician journal named her one of the 100 most
+              influential health care leaders in Minnesota.
             </Typography>
-            <Typography paragraph>
-              Becoming director of Care From the Hart, an organization that
-              provides patient advocacy and psychiatric services in Chicago and
-              Rochester, Minnesota. I was elected as the first chair of the AMA
-              Minority Affairs Section and was the first African-American woman
-              to be elected to the Minnesota Medical Association’s board of
-              trustees. She was also named the Minnesota Psychiatric Society
-              Psychiatrist of the Year.
-            </Typography>
-            <Typography paragraph>
-              I didn’t have a straight path to medicine. At 20, I was divorced
-              with three small children. In the African-American community,
-              elders often say, “God doesn’t give you more than you can handle.”
-              In my opinion, God doesn't give more than a community can handle.
-              I earned a degree at the University of Chicago and completed a
-              residency at Mayo Clinic by accepting help from others and
-              persisting even when told that my goals were impossible. All of
-              three of my children earned college degrees as well as two
-              graduate degrees. My personal motto: Let your haters be your
-              motivators! Persist!
-            </Typography>
+            <Typography paragraph></Typography>
+            <Typography paragraph></Typography>
           </CardContent>
         </Collapse>
       </Card>
